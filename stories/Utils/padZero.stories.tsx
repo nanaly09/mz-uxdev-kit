@@ -1,10 +1,9 @@
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import { padZero } from '@/utils/padZero';
+import { padZero } from '@/index';
 
 type Args = {
   number: number;
-  length: number;
+  length?: number;
 };
 
 const meta: Meta<Args> = {
