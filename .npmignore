@@ -1,0 +1,16 @@
+# 개발 전용 파일 제외
+src/
+stories/
+.storybook/
+*.stories.tsx
+*.test.ts
+tsconfig.json
+tsconfig.*.json
+.vscode/
+.eslintrc.*
+.prettierrc*
+.npmrc
+*.log
+node_modules/
+coverage/
+storybook-static/

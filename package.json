@@ -2,10 +2,19 @@
   "name": "mz-uxdev-kit",
   "version": "0.1.0",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "peerDependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
@@ -32,6 +41,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --out-dir dist",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "publish": "npm publish --access public"
   }
 }
