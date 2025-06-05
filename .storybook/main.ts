@@ -9,10 +9,12 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: {},
   },
+  staticDirs: ['../public'],
   viteFinal: async (config) => {
     config.resolve = {
       alias: {
         '@': path.resolve(__dirname, '../src'),
+        '@/': path.resolve(__dirname, '../src/'),
       },
     };
     return config;
