@@ -1,2 +1,2 @@
-export * from './padZero';
+export * from './basic';
 export * from './query';
