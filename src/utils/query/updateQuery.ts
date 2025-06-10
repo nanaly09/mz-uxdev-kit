@@ -13,5 +13,5 @@ export const updateQuery = (newParams: QueryObject, options?: UpdateQueryOptions
   const merged = { ...getQuery(options?.baseURL), ...newParams };
   const final = options?.clean === false ? merged : cleanQuery(merged);
 
-  return stringifyQuery(final);
+  return stringifyQuery(final, options);
 };

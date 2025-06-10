@@ -1,5 +1,5 @@
-export type QueryValue = string | string[] | number | boolean | null | undefined;
-export type QueryObject = Record<string, QueryValue>;
+export type QueryValue = string | number | boolean | null | undefined;
+export type QueryObject = Record<string, QueryValue | QueryValue[]>;
 
 export type QueryOptions = {
   clean?: boolean;

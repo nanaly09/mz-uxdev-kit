@@ -15,6 +15,6 @@ export const appendQuery = (
   options?: QueryOptions,
 ): string => {
   const finalParams = options?.clean === false ? params : cleanQuery(params);
-  const query = stringifyQuery(finalParams);
+  const query = stringifyQuery(finalParams, options);
   return query ? `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}${query.slice(1)}` : baseUrl;
 };
