@@ -7,7 +7,7 @@ type Args = {
 };
 
 const meta: Meta<Args> = {
-  title: 'utils/basic/padZero',
+  title: 'utils | basic/padZero',
   // tags: ['autodocs'],
   argTypes: {
     number: {
