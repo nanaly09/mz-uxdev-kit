@@ -5,8 +5,9 @@ import path from 'path';
 const config: StorybookConfig = {
   stories: [
     '../src/**/*.stories.@(ts|tsx)',
-    '../stories/**/*.mdx',
-    '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/**/stories.@(ts|tsx)',
+    // '../stories/**/*.mdx',
+    // '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
   addons: ['@storybook/addon-onboarding', '@storybook/addon-docs'],
   framework: {

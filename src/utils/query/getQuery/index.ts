@@ -1,5 +1,5 @@
-import { QueryObject, QueryOptions } from './query.types';
-import { parseQuery } from './parseQuery';
+import { QueryObject, QueryOptions } from '../types';
+import { parseQuery } from '../parseQuery';
 
 /**
  * 현재 브라우저 주소 또는 지정된 URL에서 쿼리 문자열을 추출하여 객체로 반환합니다.

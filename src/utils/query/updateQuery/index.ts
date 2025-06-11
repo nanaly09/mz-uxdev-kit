@@ -1,7 +1,7 @@
-import { QueryObject, UpdateQueryOptions } from './query.types';
-import { getQuery } from './getQuery';
-import { cleanQuery } from './cleanQuery';
-import { stringifyQuery } from './stringifyQuery';
+import { QueryObject, UpdateQueryOptions } from '../types';
+import { getQuery } from '../getQuery';
+import { cleanQuery } from '../cleanQuery';
+import { stringifyQuery } from '../stringifyQuery';
 
 /**
  * 기존 URL 쿼리에 새로운 값을 추가하거나 갱신합니다.

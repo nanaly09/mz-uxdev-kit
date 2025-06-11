@@ -1,6 +1,6 @@
-import { QueryObject, QueryOptions } from './query.types';
-import { cleanQuery } from './cleanQuery';
-import { stringifyQuery } from './stringifyQuery';
+import { QueryObject, QueryOptions } from '../types';
+import { cleanQuery } from '../cleanQuery';
+import { stringifyQuery } from '../stringifyQuery';
 
 /**
  * 지정된 URL에 쿼리 파라미터를 추가합니다.

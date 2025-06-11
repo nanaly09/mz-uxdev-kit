@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { cleanQuery } from '@/utils/query';
-import type { QueryObject } from '@/utils/query';
+import { cleanQuery } from '../cleanQuery';
+import type { QueryObject } from '../types';
 
 type Args = {
   params: QueryObject;

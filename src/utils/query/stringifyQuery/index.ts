@@ -1,5 +1,5 @@
-import { QueryObject, QueryOptions } from './query.types';
-import { cleanQuery } from './cleanQuery';
+import { QueryObject, QueryOptions } from '../types';
+import { cleanQuery } from '../cleanQuery';
 
 /**
  * 객체를 쿼리 문자열로 변환합니다.

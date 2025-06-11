@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { padZero } from '@/index';
+import { padZero } from '../padZero';
 
 type Args = {
   number: number;

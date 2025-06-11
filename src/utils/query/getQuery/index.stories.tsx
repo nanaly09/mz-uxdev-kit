@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { getQuery } from '@/utils/query';
-
-import type { QueryOptions } from '@/utils/query';
+import { getQuery } from '../getQuery';
+import type { QueryOptions } from '../types';
 
 type Args = {
   url?: string;
