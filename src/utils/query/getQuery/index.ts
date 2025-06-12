@@ -1,4 +1,4 @@
-import { QueryObject, QueryOptions } from '../types';
+import { QueryObject, QueryOptions } from '../query.types';
 import { parseQuery } from '../parseQuery';
 
 /**

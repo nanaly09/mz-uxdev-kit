@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { updateQuery } from '../updateQuery';
-import type { QueryObject, UpdateQueryOptions } from '../types';
+import type { QueryObject, UpdateQueryOptions } from '../query.types';
 
 type Args = {
   newParams: QueryObject;
