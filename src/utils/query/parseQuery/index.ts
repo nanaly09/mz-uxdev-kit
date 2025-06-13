@@ -1,5 +1,5 @@
 import { cleanQuery } from '../cleanQuery';
-import { QueryObject, QueryOptions } from '../query.types';
+import { QueryObject, QueryOptions } from '../types';
 
 /**
  * 쿼리 문자열을 객체로 파싱합니다.

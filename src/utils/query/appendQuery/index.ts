@@ -1,4 +1,4 @@
-import { QueryObject, QueryOptions } from '../query.types';
+import { QueryObject, QueryOptions } from '../types';
 import { cleanQuery } from '../cleanQuery';
 import { stringifyQuery } from '../stringifyQuery';
 

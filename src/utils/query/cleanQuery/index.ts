@@ -1,4 +1,4 @@
-import { QueryObject } from '../query.types';
+import { QueryObject } from '../types';
 
 /**
  * 객체에서 null, undefined, 빈 문자열을 제거합니다.
