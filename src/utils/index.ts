@@ -1,2 +1,2 @@
-export * from './basic';
+export * from './number';
 export * from './query';
