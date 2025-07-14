@@ -15,7 +15,7 @@ const extensionToMime: Record<string, string> = {
  * 동일한 포맷 + 퀄리티 1일 경우 변환하지 않고 원본 반환합니다.
  * @param file - 이미지 파일
  * @param options - 변환 옵션
- * @returns 변환된 Blob
+ * @returns 변환된 File
  */
 export const convertImage = async (file: File, options: ConvertImageOptions): Promise<File> => {
   const { extension, quality = 1 } = options;

@@ -16,12 +16,12 @@ const loadImageFromFile = (file: File): Promise<HTMLImageElement> => {
 };
 
 /**
- * 이미지 파일을 주어진 크기로 리사이즈하거나, 필요 시 crop하여 Blob 형태로 반환합니다.
+ * 이미지 파일을 주어진 크기로 리사이즈하거나, 필요 시 crop하여 File 형태로 반환합니다.
  * - crop이 true면 'cover' 방식으로 리사이즈 후 잘라냄
  * - crop이 false면 'contain' 방식으로 리사이즈만 수행
  * @param file - 이미지 파일
  * @param options - 리사이즈 옵션
- * @returns Blob 형태로 리사이즈된 이미지
+ * @returns File 형태로 리사이즈된 이미지
  */
 export const resizeImage = async (file: File, options: ResizeImageOptions = {}): Promise<File> => {
   const { width = Infinity, height = Infinity, crop = true, cropPosition = 'center' } = options;

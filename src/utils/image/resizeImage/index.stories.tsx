@@ -10,12 +10,12 @@ type Props = {
   cropPosition: CropPosition;
 };
 
-// type ImageInfo = {
-//   url: string;
-//   width: number;
-//   height: number;
-//   size: number;
-// };
+type ImageInfo = {
+  url: string;
+  width: number;
+  height: number;
+  size: number;
+};
 
 const meta: Meta<Props> = {
   title: 'utils | image/resizeImage',
@@ -44,18 +44,8 @@ export default meta;
 
 export const 기본사용: StoryObj<Props> = {
   render: ({ width, height, crop, cropPosition }) => {
-    const [original, setOriginal] = useState<{
-      url: string;
-      width: number;
-      height: number;
-      size: number;
-    } | null>(null);
-    const [resized, setResized] = useState<{
-      url: string;
-      width: number;
-      height: number;
-      size: number;
-    } | null>(null);
+    const [original, setOriginal] = useState<ImageInfo | null>(null);
+    const [resized, setResized] = useState<ImageInfo | null>(null);
     const [currentFile, setCurrentFile] = useState<File | null>(null);
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +56,10 @@ export const 기본사용: StoryObj<Props> = {
     };
 
     const processResize = async (file: File) => {
+      // 기존 URL 정리
+      original?.url && URL.revokeObjectURL(original.url);
+      resized?.url && URL.revokeObjectURL(resized.url);
+
       const img = new Image();
       img.src = URL.createObjectURL(file);
       await new Promise((resolve) => (img.onload = resolve));
@@ -77,13 +71,13 @@ export const 기본사용: StoryObj<Props> = {
         size: file.size,
       });
 
-      const blob = await resizeImage(file, {
+      const resizedFile = await resizeImage(file, {
         width,
         height,
         crop,
         cropPosition,
       });
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(resizedFile);
 
       const resizedImg = new Image();
       resizedImg.src = url;
@@ -93,7 +87,7 @@ export const 기본사용: StoryObj<Props> = {
         url,
         width: resizedImg.width,
         height: resizedImg.height,
-        size: blob.size,
+        size: resizedFile.size,
       });
     };
 
@@ -118,13 +112,7 @@ export const 기본사용: StoryObj<Props> = {
   },
 };
 
-const ImagePreview = ({
-  label,
-  info,
-}: {
-  label: string;
-  info: { url: string; width: number; height: number; size: number };
-}) => (
+const ImagePreview = ({ label, info }: { label: string; info: ImageInfo }) => (
   <div>
     <h3>{label}</h3>
     <img src={info.url} style={{ maxWidth: 300 }} />

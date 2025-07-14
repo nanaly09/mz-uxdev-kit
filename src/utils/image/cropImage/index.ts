@@ -1,10 +1,10 @@
 import type { CropImageOptions, CropPosition } from '../types';
 
 /**
- * 이미지 파일을 지정된 위치 기준으로 크롭하여 Blob으로 반환합니다.
+ * 이미지 파일을 지정된 위치 기준으로 크롭하여 File로 반환합니다.
  * @param file - 이미지 파일
  * @param options - 크롭 옵션
- * @returns 크롭된 Blob 이미지
+ * @returns 크롭된 File 이미지
  */
 export const cropImage = async (file: File, options: CropImageOptions): Promise<File> => {
   const { width, height, cropPosition = 'center' } = options;
