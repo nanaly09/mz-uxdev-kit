@@ -17,7 +17,7 @@ const extensionToMime: Record<string, string> = {
  * @param options - 변환 옵션
  * @returns 변환된 Blob
  */
-export const convertImage = async (file: File, options: ConvertImageOptions): Promise<Blob> => {
+export const convertImage = async (file: File, options: ConvertImageOptions): Promise<File> => {
   const { extension, quality = 1 } = options;
   const mime = extensionToMime[extension.toLowerCase()];
 
@@ -42,7 +42,7 @@ export const convertImage = async (file: File, options: ConvertImageOptions): Pr
     canvas.toBlob(
       (blob) => {
         if (!blob) return reject(new Error('Failed to convert canvas to blob'));
-        resolve(blob);
+        resolve(new File([blob], file.name, { type: blob.type }));
       },
       mime,
       quality,

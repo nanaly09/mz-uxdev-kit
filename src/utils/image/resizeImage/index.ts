@@ -23,7 +23,7 @@ const loadImageFromFile = (file: File): Promise<HTMLImageElement> => {
  * @param options - 리사이즈 옵션
  * @returns Blob 형태로 리사이즈된 이미지
  */
-export const resizeImage = async (file: File, options: ResizeImageOptions = {}): Promise<Blob> => {
+export const resizeImage = async (file: File, options: ResizeImageOptions = {}): Promise<File> => {
   const { width = Infinity, height = Infinity, crop = true, cropPosition = 'center' } = options;
 
   const image = await loadImageFromFile(file);
@@ -87,10 +87,11 @@ export const resizeImage = async (file: File, options: ResizeImageOptions = {}):
 
     ctx.drawImage(image, 0, 0, resizedWidth, resizedHeight);
 
+    // Blob을 File로 변환하여 반환
     return await new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
         if (!blob) return reject(new Error('Failed to convert canvas to blob'));
-        resolve(blob);
+        resolve(new File([blob], file.name, { type: blob.type }));
       }, file.type);
     });
   }

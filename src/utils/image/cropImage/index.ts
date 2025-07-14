@@ -6,8 +6,14 @@ import type { CropImageOptions, CropPosition } from '../types';
  * @param options - 크롭 옵션
  * @returns 크롭된 Blob 이미지
  */
-export const cropImage = async (file: File, options: CropImageOptions): Promise<Blob> => {
+export const cropImage = async (file: File, options: CropImageOptions): Promise<File> => {
   const { width, height, cropPosition = 'center' } = options;
+
+  // width나 height가 제공되지 않으면 원본 파일 반환
+  if (width === undefined || height === undefined) {
+    return file;
+  }
+
   const image = await loadImageFromFile(file);
 
   const sx = getCropX(image.width, width, cropPosition);
@@ -25,7 +31,7 @@ export const cropImage = async (file: File, options: CropImageOptions): Promise<
   return await new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
       if (!blob) return reject(new Error('Failed to convert canvas to blob'));
-      resolve(blob);
+      resolve(new File([blob], file.name, { type: blob.type }));
     }, file.type);
   });
 };
