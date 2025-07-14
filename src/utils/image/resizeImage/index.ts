@@ -24,31 +24,26 @@ const loadImageFromFile = (file: File): Promise<HTMLImageElement> => {
  * @returns Blob 형태로 리사이즈된 이미지
  */
 export const resizeImage = async (file: File, options: ResizeImageOptions = {}): Promise<Blob> => {
-  const {
-    maxWidth = Infinity,
-    maxHeight = Infinity,
-    crop = true,
-    cropPosition = 'center',
-  } = options;
+  const { width = Infinity, height = Infinity, crop = true, cropPosition = 'center' } = options;
 
   const image = await loadImageFromFile(file);
 
-  if (!isFinite(maxWidth) || !isFinite(maxHeight)) {
-    throw new Error('maxWidth와 maxHeight는 finite 값이어야 합니다.');
+  if (!isFinite(width) || !isFinite(height)) {
+    throw new Error('width와 height는 finite 값이어야 합니다.');
   }
 
   if (crop) {
     // cover 방식: 가득 채우도록 확대/축소 후 잘라냄
-    const targetRatio = maxWidth / maxHeight;
+    const targetRatio = width / height;
     const imageRatio = image.width / image.height;
 
     let scale;
     if (imageRatio > targetRatio) {
       // 가로가 더 긴 경우: 세로에 맞춰서 스케일
-      scale = maxHeight / image.height;
+      scale = height / image.height;
     } else {
       // 세로가 더 긴 경우: 가로에 맞춰서 스케일
-      scale = maxWidth / image.width;
+      scale = width / image.width;
     }
 
     const scaledWidth = Math.round(image.width * scale);
@@ -73,24 +68,24 @@ export const resizeImage = async (file: File, options: ResizeImageOptions = {}):
     // scale된 Blob을 cropImage에 넘김
     const scaledFile = new File([scaledBlob], file.name, { type: file.type });
     return await cropImage(scaledFile, {
-      width: maxWidth,
-      height: maxHeight,
+      width,
+      height,
       cropPosition,
     });
   } else {
     // contain 방식: 최대 크기 내에서 비율 유지하여 축소
-    const ratio = Math.min(maxWidth / image.width, maxHeight / image.height, 1);
-    const width = Math.round(image.width * ratio);
-    const height = Math.round(image.height * ratio);
+    const ratio = Math.min(width / image.width, height / image.height, 1);
+    const resizedWidth = Math.round(image.width * ratio);
+    const resizedHeight = Math.round(image.height * ratio);
 
     const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = resizedWidth;
+    canvas.height = resizedHeight;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) throw new Error('Canvas not supported');
 
-    ctx.drawImage(image, 0, 0, width, height);
+    ctx.drawImage(image, 0, 0, resizedWidth, resizedHeight);
 
     return await new Promise((resolve, reject) => {
       canvas.toBlob((blob) => {
