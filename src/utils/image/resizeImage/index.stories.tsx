@@ -4,8 +4,8 @@ import { resizeImage } from './index';
 import type { CropPosition } from '../types';
 
 type Props = {
-  maxWidth: number;
-  maxHeight: number;
+  width: number;
+  height: number;
   crop: boolean;
   cropPosition: CropPosition;
 };
@@ -20,8 +20,8 @@ type ImageInfo = {
 const meta: Meta<Props> = {
   title: 'utils | image/resizeImage',
   argTypes: {
-    maxWidth: { control: 'number', defaultValue: 400 },
-    maxHeight: { control: 'number', defaultValue: 400 },
+    width: { control: 'number', defaultValue: 400 },
+    height: { control: 'number', defaultValue: 400 },
     crop: { control: 'boolean', defaultValue: true },
     cropPosition: {
       control: 'select',
@@ -43,7 +43,7 @@ const meta: Meta<Props> = {
 export default meta;
 
 export const 기본사용: StoryObj<Props> = {
-  render: ({ maxWidth, maxHeight, crop, cropPosition }) => {
+  render: ({ width, height, crop, cropPosition }) => {
     const [original, setOriginal] = useState<ImageInfo | null>(null);
     const [resized, setResized] = useState<ImageInfo | null>(null);
     const [currentFile, setCurrentFile] = useState<File | null>(null);
@@ -56,6 +56,10 @@ export const 기본사용: StoryObj<Props> = {
     };
 
     const processResize = async (file: File) => {
+      // 기존 URL 정리
+      original?.url && URL.revokeObjectURL(original.url);
+      resized?.url && URL.revokeObjectURL(resized.url);
+
       const img = new Image();
       img.src = URL.createObjectURL(file);
       await new Promise((resolve) => (img.onload = resolve));
@@ -67,8 +71,13 @@ export const 기본사용: StoryObj<Props> = {
         size: file.size,
       });
 
-      const blob = await resizeImage(file, { maxWidth, maxHeight, crop, cropPosition });
-      const url = URL.createObjectURL(blob);
+      const resizedFile = await resizeImage(file, {
+        width,
+        height,
+        crop,
+        cropPosition,
+      });
+      const url = URL.createObjectURL(resizedFile);
 
       const resizedImg = new Image();
       resizedImg.src = url;
@@ -78,7 +87,7 @@ export const 기본사용: StoryObj<Props> = {
         url,
         width: resizedImg.width,
         height: resizedImg.height,
-        size: blob.size,
+        size: resizedFile.size,
       });
     };
 
